@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meta Space Affiliate — ابدأ التسويق بدون مخزون</title>
+<meta name="description" content="انضم إلى Meta Space Affiliate وابدأ التسويق بمنتجات جاهزة، تابع الطلبات والعمولات من مكان واحد، بدون شراء مخزون أو إدارة الشحن." />
+<link rel="icon" href="logo.png" />
+<style>
+    /* Meta Space Affiliate — Landing Page (Plain HTML/CSS) */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@400;600;700;800&display=swap');
+
+:root {
+  /* Brand */
+  --ms-deep-blue: #004A86;
+  --ms-primary-blue: #0072CE;
+  --ms-electric-blue: #1289F7;
+  --ms-sky-blue: #5EC8FF;
+  --ms-ice-blue: #EAF4FF;
+
+  --ms-cta-orange: #FF9800;
+  --ms-cta-amber: #FDBA2D;
+  --ms-cta-orange-dark: #F57C00;
+
+  /* Backgrounds & surfaces */
+  --ms-bg-page: #F6FAFF;
+  --ms-bg-blue-soft: #EEF7FF;
+  --ms-bg-grad-start: #003F78;
+  --ms-bg-grad-mid: #0072CE;
+  --ms-bg-grad-end: #1597FF;
+
+  --ms-surface: #FFFFFF;
+  --ms-surface-glass: rgba(255, 255, 255, 0.16);
+  --ms-surface-glass-strong: rgba(255, 255, 255, 0.24);
+  --ms-surface-input: #EAF2FF;
+  --ms-surface-input-white: #F8FBFF;
+
+  /* Text */
+  --ms-text-primary: #102033;
+  --ms-text-heading: #073B6F;
+  --ms-text-secondary: #486783;
+  --ms-text-muted: #6F8BA6;
+  --ms-text-on-blue: #FFFFFF;
+  --ms-text-on-blue-muted: #CFEAFF;
+
+  /* Borders & shadows */
+  --ms-border: #D7E8F8;
+  --ms-border-blue-soft: rgba(94, 200, 255, 0.35);
+  --ms-shadow-blue: 0 18px 46px rgba(0, 74, 134, 0.25);
+  --ms-shadow-card: 0 10px 30px rgba(0, 74, 134, 0.10);
+  --ms-shadow-orange: 0 12px 28px rgba(255, 152, 0, 0.35);
+
+  /* Radii */
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-xl: 32px;
+
+  /* Status */
+  --status-success-bg: #E9FFF5;
+  --status-success-fg: #0F7A4A;
+  --status-pending-bg: #FFF7E6;
+  --status-pending-fg: #9A5A00;
+  --status-info-bg: #EAF4FF;
+  --status-info-fg: #075EAA;
+
+  /* Gradients */
+  --g-blue: radial-gradient(circle at 70% 20%, rgba(94, 200, 255, 0.28) 0%, transparent 32%),
+            linear-gradient(135deg, #003F78 0%, #0072CE 52%, #1597FF 100%);
+  --g-cta: linear-gradient(135deg, #FDBA2D 0%, #FF9800 48%, #F57C00 100%);
+}
+
+/* Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  direction: rtl;
+  font-family: 'IBM Plex Sans Arabic', 'Cairo', 'Tajawal', system-ui, sans-serif;
+  background: var(--ms-bg-page);
+  color: var(--ms-text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+button { font: inherit; cursor: pointer; border: none; background: none; }
+
+/* Container */
+.container {
+  width: min(100% - 32px, 1200px);
+  margin-inline: auto;
+}
+
+/* ============ Buttons ============ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px; padding: 15px 28px; border-radius: 16px; font-weight: 700;
+  font-size: 16px;
+  transition: transform .25s ease, box-shadow .3s ease, background .3s ease, filter .25s ease;
+  white-space: nowrap; position: relative; overflow: hidden;
+}
+.btn::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);
+  transform: translateX(-120%); transition: transform .7s ease;
+  pointer-events: none;
+}
+.btn:hover::after { transform: translateX(120%); }
+
+.btn-primary {
+  background: var(--g-cta); color: #fff;
+  box-shadow: var(--ms-shadow-orange);
+  animation: ctaPulse 2.4s ease-in-out infinite;
+}
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 20px 44px rgba(255,152,0,.55);
+  filter: brightness(1.05);
+}
+.btn-secondary {
+  background: rgba(255,255,255,0.10);
+  color: #fff; border: 1px solid rgba(255,255,255,.4);
+  backdrop-filter: blur(14px);
+}
+.btn-secondary:hover { background: rgba(255,255,255,.22); transform: translateY(-2px); }
+.btn-outline {
+  background: #fff; color: var(--ms-primary-blue);
+  border: 1.5px solid var(--ms-border); border-radius: 16px;
+}
+.btn-outline:hover { border-color: var(--ms-primary-blue); transform: translateY(-2px); }
+
+.btn-sm { padding: 11px 22px; font-size: 14px; border-radius: 12px; }
+
+@keyframes ctaPulse {
+  0%, 100% { box-shadow: 0 12px 28px rgba(255,152,0,.35), 0 0 0 0 rgba(255,152,0,.5); }
+  50%      { box-shadow: 0 14px 34px rgba(255,152,0,.45), 0 0 0 14px rgba(255,152,0,0); }
+}
+
+/* ============ Header ============ */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--ms-border);
+  transition: box-shadow .3s, background .3s;
+}
+.header.scrolled { box-shadow: 0 6px 20px rgba(0,74,134,.08); background: rgba(255,255,255,.95); }
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px;
+}
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo img { height: 44px; width: auto; }
+.logo span {
+  font-weight: 800; color: var(--ms-text-heading); font-size: 18px;
+}
+.nav { display: flex; align-items: center; gap: 28px; }
+.nav a {
+  color: var(--ms-text-secondary); font-weight: 500; font-size: 15px;
+  position: relative; transition: color .2s;
+}
+.nav a:hover { color: var(--ms-primary-blue); }
+.nav a::after {
+  content: ''; position: absolute; bottom: -6px; right: 0;
+  width: 0; height: 2px; background: var(--ms-cta-orange);
+  transition: width .3s;
+}
+.nav a:hover::after { width: 100%; }
+
+.menu-btn {
+  display: none; width: 42px; height: 42px;
+  border-radius: 10px; background: var(--ms-ice-blue);
+  align-items: center; justify-content: center;
+}
+.menu-btn span {
+  display: block; width: 18px; height: 2px; background: var(--ms-text-heading);
+  position: relative;
+}
+.menu-btn span::before, .menu-btn span::after {
+  content: ''; position: absolute; right: 0; width: 18px; height: 2px;
+  background: var(--ms-text-heading);
+}
+.menu-btn span::before { top: -6px; }
+.menu-btn span::after { top: 6px; }
+
+/* Mobile menu drawer */
+.mobile-menu {
+  position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px;
+  height: 100vh; background: #fff; z-index: 200;
+  padding: 80px 24px 24px; transition: right .35s ease;
+  box-shadow: -10px 0 40px rgba(0,0,0,.15);
+}
+.mobile-menu.open { right: 0; }
+.mobile-menu a {
+  display: block; padding: 14px 0; font-size: 17px;
+  color: var(--ms-text-heading); font-weight: 600;
+  border-bottom: 1px solid var(--ms-border);
+}
+.mobile-menu .btn { width: 100%; margin-top: 20px; }
+.mobile-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.4);
+  opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 150;
+}
+.mobile-overlay.show { opacity: 1; pointer-events: all; }
+.mobile-close {
+  position: absolute; top: 20px; left: 20px; font-size: 28px;
+  color: var(--ms-text-heading);
+}
+
+/* ============ Hero ============ */
+.hero {
+  position: relative;
+  background: var(--g-blue);
+  color: #fff;
+  padding: 96px 0 120px;
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(94,200,255,.18), transparent 40%);
+  pointer-events: none;
+}
+.hero-grid {
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center;
+  position: relative; z-index: 2;
+}
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px; border-radius: 999px;
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+  font-size: 13px; font-weight: 600; color: #fff;
+  backdrop-filter: blur(10px);
+  margin-bottom: 22px;
+}
+.eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ms-cta-amber); }
+
+.hero h1 {
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.25; font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 22px;
+}
+.hero h1 .accent {
+  background: linear-gradient(120deg, #FDBA2D, #FF9800);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero p.lead {
+  font-size: 18px; color: var(--ms-text-on-blue-muted);
+  max-width: 560px; margin-bottom: 16px;
+}
+.trust-line {
+  font-size: 14px; color: var(--ms-text-on-blue-muted);
+  margin-bottom: 32px; opacity: .9;
+}
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* Hero visual — Glass Dashboard */
+.hero-visual { position: relative; }
+
+.dashboard-card {
+  position: relative;
+  background: linear-gradient(160deg, rgba(255,255,255,.18), rgba(255,255,255,.06));
+  border: 1px solid rgba(255,255,255,.28);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 28px;
+  padding: 24px;
+  box-shadow: 0 30px 70px rgba(0,40,90,.35), inset 0 1px 0 rgba(255,255,255,.25);
+  color: #fff;
+  animation: floatY 7s ease-in-out infinite;
+}
+@keyframes floatY {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-10px); }
+}
+
+.dashboard-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 18px;
+}
+.live-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 999px;
+  background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3);
+  font-size: 12px; font-weight: 700;
+}
+.live-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--ms-cta-amber);
+  box-shadow: 0 0 0 0 rgba(253,186,45,.7);
+  animation: livePing 1.6s ease-out infinite;
+}
+@keyframes livePing {
+  0%   { box-shadow: 0 0 0 0 rgba(253,186,45,.7); }
+  100% { box-shadow: 0 0 0 10px rgba(253,186,45,0); }
+}
+.dashboard-title { text-align: left; }
+.dashboard-title span { font-size: 12px; opacity: .8; display: block; }
+.dashboard-title strong { font-size: 18px; font-weight: 700; }
+
+.dash-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  margin-bottom: 14px;
+}
+.dash-tile {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 18px;
+  padding: 14px 16px;
+  transition: transform .3s ease, background .3s ease, border-color .3s ease;
+}
+.dash-tile:hover {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,.18);
+  border-color: rgba(255,255,255,.4);
+}
+.tile-head {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 12px; opacity: .85; margin-bottom: 8px;
+}
+.tile-val { font-size: 28px; font-weight: 800; line-height: 1; }
+.tile-foot { font-size: 10px; opacity: .7; margin-top: 6px; }
+
+.dash-order {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 18px;
+  padding: 14px 16px;
+}
+.order-head {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 10px; margin-bottom: 14px;
+}
+.order-head strong { display: block; font-size: 14px; font-weight: 700; }
+.order-head p { font-size: 11px; opacity: .8; margin: 2px 0 0; }
+.status-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700;
+  background: rgba(253,186,45,.2); border: 1px solid rgba(253,186,45,.5);
+  color: #FFE3A8;
+  white-space: nowrap;
+}
+.order-track {
+  position: relative; display: grid; grid-template-columns: repeat(3,1fr);
+  align-items: center; padding: 10px 4px 0;
+}
+.track-line, .track-line.active {
+  position: absolute; top: 14px; right: 12%; left: 12%;
+  height: 3px; border-radius: 3px; background: rgba(255,255,255,.2); z-index: 0;
+}
+.track-line.active {
+  right: 12%; left: 50%;
+  background: var(--ms-cta-amber);
+}
+.t-step { position: relative; z-index: 1; text-align: center; }
+.t-step span {
+  display: block; width: 14px; height: 14px; border-radius: 50%;
+  background: rgba(255,255,255,.3); border: 2px solid rgba(255,255,255,.4);
+  margin: 0 auto 8px;
+  transition: all .3s;
+}
+.t-step.done span { background: #fff; border-color: #fff; }
+.t-step.active span {
+  background: var(--ms-cta-amber); border-color: var(--ms-cta-amber);
+  box-shadow: 0 0 0 0 rgba(253,186,45,.6);
+  animation: livePing 1.8s ease-out infinite;
+}
+.t-step label { font-size: 11px; opacity: .85; }
+
+
+/* ============ Trust Bar ============ */
+.trust-bar {
+  margin-top: -60px; position: relative; z-index: 10;
+}
+.trust-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+  background: #fff; padding: 28px; border-radius: var(--r-lg);
+  box-shadow: var(--ms-shadow-blue); border: 1px solid var(--ms-border);
+}
+.trust-item { display: flex; gap: 14px; align-items: flex-start; }
+.trust-item .ico {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--ms-ice-blue); color: var(--ms-primary-blue);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.trust-item h4 { font-size: 15px; color: var(--ms-text-heading); margin-bottom: 4px; font-weight: 700; }
+.trust-item p { font-size: 13px; color: var(--ms-text-secondary); line-height: 1.5; }
+
+/* ============ Section common ============ */
+section { padding: 96px 0; }
+.section-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+.section-eyebrow {
+  display: inline-block; padding: 6px 14px; border-radius: 999px;
+  background: var(--ms-ice-blue); color: var(--ms-primary-blue);
+  font-size: 13px; font-weight: 700; margin-bottom: 14px;
+}
+.section-head h2 {
+  font-size: clamp(28px, 3.5vw, 42px); color: var(--ms-text-heading);
+  font-weight: 800; line-height: 1.3; margin-bottom: 16px;
+  letter-spacing: -0.3px;
+}
+.section-head p { color: var(--ms-text-secondary); font-size: 17px; }
+
+/* ============ About ============ */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+}
+.about-text h2 { font-size: clamp(28px, 3.5vw, 42px); color: var(--ms-text-heading); margin-bottom: 22px; line-height: 1.3; }
+.about-text p { color: var(--ms-text-secondary); font-size: 16px; margin-bottom: 16px; }
+.highlight-card {
+  margin-top: 24px; padding: 20px 24px; border-radius: var(--r-md);
+  background: linear-gradient(135deg, var(--ms-ice-blue), #fff);
+  border-right: 4px solid var(--ms-cta-orange);
+  display: flex; gap: 14px; align-items: center;
+  box-shadow: var(--ms-shadow-card);
+}
+.highlight-card .ico {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--g-cta); color: #fff;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.highlight-card p { color: var(--ms-text-heading); font-weight: 600; margin: 0; }
+
+.about-text .check-list { list-style: none; margin-top: 22px; padding: 0; }
+.about-text .check-list li {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0; color: var(--ms-text-secondary); font-size: 15px;
+  font-weight: 500;
+}
+.about-text .check-list .ck {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--ms-ice-blue); color: var(--ms-primary-blue);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.about-text .brand-en { color: var(--ms-primary-blue); font-weight: 800; }
+
+.badge { padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+.badge.success { background: var(--status-success-bg); color: var(--status-success-fg); }
+.badge.pending { background: var(--status-pending-bg); color: var(--status-pending-fg); }
+.badge.info { background: var(--status-info-bg); color: var(--status-info-fg); }
+
+.about-visual {
+  padding: 24px;
+  background: linear-gradient(180deg, var(--ms-bg-blue-soft), #fff);
+  border: 1px solid var(--ms-border);
+  border-radius: 28px;
+  box-shadow: var(--ms-shadow-card);
+}
+.stat-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+.stat-card {
+  background: #fff; border: 1px solid var(--ms-border);
+  border-radius: 18px; padding: 18px;
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  position: relative; overflow: hidden;
+}
+.stat-card::before {
+  content: ''; position: absolute; top: 0; right: 0;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,114,206,.08), transparent 70%);
+  transform: translate(30%,-30%);
+}
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--ms-sky-blue);
+  box-shadow: 0 14px 32px rgba(0,74,134,.12);
+}
+.s-ico {
+  width: 38px; height: 38px; border-radius: 12px;
+  background: var(--ms-ice-blue); color: var(--ms-primary-blue);
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+}
+.s-lbl { font-size: 12px; color: var(--ms-text-muted); margin-bottom: 4px; font-weight: 500; }
+.s-val { font-size: 18px; font-weight: 800; color: var(--ms-text-heading); }
+.stat-card.stat-wide { grid-column: 1 / -1; }
+.stat-card.stat-wide .s-lbl { color: var(--ms-primary-blue); font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.stat-card.stat-wide .s-desc { font-size: 13px; color: var(--ms-text-secondary); line-height: 1.7; }
+.stat-card.stat-wide strong { color: var(--ms-text-heading); }
+
+
+/* ============ Benefits ============ */
+.benefits-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+}
+.benefit-card {
+  background: #fff; padding: 28px; border-radius: var(--r-md);
+  border: 1px solid var(--ms-border);
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+}
+.benefit-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--ms-sky-blue);
+  box-shadow: 0 18px 38px rgba(0,74,134,.14);
+}
+.benefit-card .ico {
+  width: 56px; height: 56px; border-radius: 16px;
+  background: var(--ms-ice-blue); color: var(--ms-primary-blue);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+  transition: transform .3s ease, background .3s ease, color .3s ease;
+}
+.benefit-card:hover .ico { transform: scale(1.1) rotate(-6deg); background: var(--ms-primary-blue); color: #fff; }
+.benefit-card:hover .ico.orange { background: var(--ms-cta-orange); color: #fff; }
+.benefit-card .ico.orange { background: #FFF1DC; color: var(--ms-cta-orange-dark); }
+.benefit-card h3 { font-size: 19px; color: var(--ms-text-heading); margin-bottom: 10px; font-weight: 700; }
+.benefit-card p { color: var(--ms-text-secondary); font-size: 14px; line-height: 1.7; }
+.benefit-card .micro { font-size: 12px; color: var(--ms-text-muted); margin-top: 8px; display: block; }
+
+/* ============ Platform Preview ============ */
+.platform-preview { background: var(--ms-bg-blue-soft); }
+.preview-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+}
+.preview-card {
+  background: #fff; border-radius: var(--r-lg); padding: 22px;
+  border: 1px solid var(--ms-border); box-shadow: var(--ms-shadow-card);
+  transition: transform .3s;
+}
+.preview-card:hover { transform: translateY(-6px); }
+.preview-card h4 { color: var(--ms-text-heading); font-size: 17px; margin-bottom: 14px; }
+
+.product-mock {
+  height: 130px; border-radius: var(--r-md);
+  background: linear-gradient(135deg, #5EC8FF, #1289F7);
+  margin-bottom: 14px; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.product-mock::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.3), transparent 50%);
+}
+.product-mock svg { width: 60px; height: 60px; color: #fff; opacity: .9; z-index: 2; }
+
+.price-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.price-row .price { font-size: 18px; font-weight: 800; color: var(--ms-text-heading); }
+.tag { font-size: 11px; padding: 4px 10px; background: var(--status-info-bg); color: var(--status-info-fg); border-radius: 999px; font-weight: 700; }
+
+.timeline-mini { display: flex; align-items: center; gap: 8px; margin: 14px 0 8px; }
+.timeline-mini .step {
+  flex: 1; height: 6px; border-radius: 4px; background: var(--ms-border);
+  position: relative;
+}
+.timeline-mini .step.done { background: var(--status-success-fg); }
+.timeline-mini .step.active { background: var(--ms-cta-orange); }
+.timeline-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--ms-text-muted); }
+
+.commission-row { display: flex; justify-content: space-between; padding: 10px 12px; background: var(--ms-bg-blue-soft); border-radius: var(--r-sm); margin-bottom: 6px; font-size: 13px; }
+.commission-row strong { color: var(--ms-text-heading); }
+.note-small { font-size: 12px; color: var(--ms-text-muted); margin-top: 10px; display: block; }
+
+/* ============ Join Process / Journey ============ */
+.journey {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  position: relative; margin: 50px 0; gap: 8px;
+}
+.journey::before {
+  content: ''; position: absolute; top: 28px; right: 6%; left: 6%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--ms-primary-blue), var(--ms-sky-blue));
+  border-radius: 3px; z-index: 0;
+}
+.j-step { flex: 1; text-align: center; position: relative; z-index: 1; }
+.j-step .num {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #fff; border: 3px solid var(--ms-primary-blue);
+  color: var(--ms-primary-blue); font-weight: 800; font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px; box-shadow: var(--ms-shadow-card);
+  transition: transform .3s;
+}
+.j-step:hover .num { transform: scale(1.1); background: var(--g-cta); color: #fff; border-color: var(--ms-cta-orange); }
+.j-step h4 { font-size: 14px; color: var(--ms-text-heading); margin-bottom: 4px; font-weight: 700; }
+.j-step p { font-size: 12px; color: var(--ms-text-secondary); }
+
+.role-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+.role-card {
+  padding: 26px; border-radius: var(--r-md); background: #fff;
+  border: 1px solid var(--ms-border); display: flex; gap: 16px; align-items: flex-start;
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.role-card:hover { transform: translateY(-4px); border-color: var(--ms-sky-blue); box-shadow: 0 14px 32px rgba(0,74,134,.12); }
+.role-card .ico {
+  width: 48px; height: 48px; border-radius: 14px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.role-card.you .ico { background: #FFF1DC; color: var(--ms-cta-orange-dark); }
+.role-card.platform .ico { background: var(--ms-ice-blue); color: var(--ms-primary-blue); }
+.role-card h4 { color: var(--ms-text-heading); font-size: 17px; margin-bottom: 6px; }
+.role-card p { color: var(--ms-text-secondary); font-size: 14px; }
+
+/* ============ Start Steps ============ */
+.start-steps {
+  background: linear-gradient(180deg, var(--ms-bg-blue-soft), #fff);
+}
+.steps-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px;
+}
+.step-card {
+  background: #fff; padding: 32px 28px; border-radius: var(--r-lg);
+  border: 1px solid var(--ms-border); position: relative;
+  transition: transform .3s, box-shadow .3s;
+}
+.step-card:hover { transform: translateY(-6px); box-shadow: var(--ms-shadow-blue); }
+.step-card .num {
+  font-size: 56px; font-weight: 800;
+  background: linear-gradient(135deg, var(--ms-primary-blue), var(--ms-sky-blue));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1; margin-bottom: 16px;
+}
+.step-card h3 { color: var(--ms-text-heading); font-size: 20px; margin-bottom: 10px; }
+.step-card p { color: var(--ms-text-secondary); font-size: 14px; }
+
+.steps-cta { text-align: center; }
+.safety-line { font-size: 14px; color: var(--ms-text-muted); margin-top: 16px; }
+
+/* ============ Legal Trust Note ============ */
+.legal-note {
+  padding: 28px; border-radius: var(--r-md);
+  background: var(--ms-bg-blue-soft); border: 1px dashed var(--ms-border);
+  display: flex; gap: 16px; align-items: flex-start;
+  max-width: 900px; margin: 60px auto 0;
+}
+.legal-note .ico {
+  width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+  background: #fff; color: var(--ms-primary-blue);
+  display: flex; align-items: center; justify-content: center;
+}
+.legal-note p { color: var(--ms-text-secondary); font-size: 14px; line-height: 1.7; }
+
+/* ============ Footer ============ */
+.footer {
+  background: var(--g-blue);
+  color: #fff; padding: 80px 0 30px; position: relative; overflow: hidden;
+}
+.footer::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 80% 0%, rgba(94,200,255,.2), transparent 50%);
+  pointer-events: none;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+  position: relative; z-index: 2; margin-bottom: 50px;
+}
+.footer-brand .logo span { color: #fff; }
+.footer-brand p { color: var(--ms-text-on-blue-muted); margin-top: 16px; font-size: 14px; max-width: 360px; }
+.footer-col h5 {
+  font-size: 14px; color: #fff; margin-bottom: 18px;
+  text-transform: uppercase; letter-spacing: 1px; font-weight: 700;
+}
+.btn-primary {
+    text-align: center;
+}
+.footer-col a {
+  display: block; color: var(--ms-text-on-blue-muted);
+  padding: 6px 0; font-size: 14px; transition: color .2s;
+}
+.footer-col a:hover { color: var(--ms-cta-amber); }
+
+.social { display: flex; gap: 10px; margin-top: 18px; }
+.social a {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .25s, transform .25s;
+  padding: 0;
+}
+.social a:hover { background: var(--ms-cta-orange); transform: translateY(-3px); }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.15); padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  color: var(--ms-text-on-blue-muted); font-size: 13px;
+  position: relative; z-index: 2; flex-wrap: wrap; gap: 12px;
+}
+
+/* ============ Sticky Mobile CTA ============ */
+.mobile-cta {
+  position: fixed; bottom: 30px; right: 16px; left: 16px;
+  z-index: 90; display: none;
+  transform: translateY(200%); transition: transform .4s ease;
+}
+.mobile-cta.show { transform: translateY(0); }
+.mobile-cta .btn { width: 100%; box-shadow: 0 16px 40px rgba(255,152,0,.5); }
+
+/* ============ Reveal Animations ============ */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s ease, transform .8s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+.reveal-delay-4 { transition-delay: .4s; }
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero h1, .hero p.lead, .hero .trust-line, .hero .hero-ctas, .hero .eyebrow {
+  animation: heroIn .9s ease both;
+}
+.hero .eyebrow { animation-delay: .05s; }
+.hero h1 { animation-delay: .15s; }
+.hero p.lead { animation-delay: .3s; }
+.hero .trust-line { animation-delay: .45s; }
+.hero .hero-ctas { animation-delay: .6s; }
+.dashboard-card { animation: heroIn 1s ease .35s both, floatY 7s ease-in-out 1.4s infinite; }
+
+/* ============ Responsive ============ */
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 80px; }
+  .hero-visual { max-width: 480px; margin: 0 auto; width: 100%; }
+  .trust-grid { grid-template-columns: repeat(2, 1fr); }
+  .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+  .preview-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  section { padding: 64px 0; }
+  .hero { padding: 64px 0 100px; }
+  .nav { display: none; }
+  .menu-btn { display: flex; }
+  .header .header-cta { display: none; }
+  .trust-grid { grid-template-columns: 1fr; padding: 22px; }
+  .benefits-grid { grid-template-columns: 1fr; }
+  .role-cards { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .mobile-cta { display: block; }
+
+  .journey { flex-direction: column; gap: 24px; align-items: stretch; }
+  .journey::before {
+    top: 0; bottom: 0; right: 28px; left: auto;
+    width: 3px; height: auto;
+    background: linear-gradient(180deg, var(--ms-primary-blue), var(--ms-sky-blue));
+  }
+  .j-step { display: flex; gap: 16px; text-align: right; align-items: center; }
+  .j-step .num { margin: 0; flex-shrink: 0; }
+
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+  .hero h1 { font-size: 34px; }
+}
+</style>
+</head>
+<body>
+
+<!--  HEADER  -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="#" class="logo">
+      <img src="/logo (1).png" alt="Meta Space" />
+    </a>
+    <nav class="nav">
+      <a href="#hero">الرئيسية</a>
+      <a href="#about">من نحن؟</a>
+      <a href="#benefits">لماذا تنضم؟</a>
+      <a href="#join">كيف تنضم؟</a>
+      <a href="#start">كيف تبدأ؟</a>
+      <a href="#faq">الأسئلة الشائعة</a>
+    </nav>
+    <a href="#start" class="btn btn-primary btn-sm header-cta">انضم الآن</a>
+    <button class="menu-btn" aria-label="القائمة"><span></span></button>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-overlay"></div>
+<aside class="mobile-menu">
+  <button class="mobile-close" aria-label="إغلاق">×</button>
+  <a href="#hero">الرئيسية</a>
+  <a href="#about">من نحن؟</a>
+  <a href="#benefits">لماذا تنضم؟</a>
+  <a href="#join">كيف تنضم؟</a>
+  <a href="#start">كيف تبدأ؟</a>
+  <a href="#faq">الأسئلة الشائعة</a>
+  <a href="#start" class="btn btn-primary">انضم الآن</a>
+</aside>
+
+<!--  HERO  -->
+<section class="hero" id="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <span class="eyebrow"><span class="dot"></span> منصة Affiliate Commerce احترافية</span>
+      <h1>انضم إلى <span class="accent">Meta Space Affiliate</span> وابدأ التسويق بدون مخزون</h1>
+      <p class="lead">سوّق منتجات جاهزة، تابع طلباتك وعمولاتك من مكان واحد، واحصل على عمولة على كل طلب ناجح وفق سياسة المنصة، بدون شراء مخزون أو إدارة الشحن بنفسك.</p>
+      <p class="trust-line">نظام واضح، دعم مستمر، وتشغيل منظم يساعدك على النمو خطوة بخطوة.</p>
+      <div class="hero-ctas">
+        <a href="#start" class="btn btn-primary">ابدأ الآن كمسوق
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        </a>
+        <a href="#join" class="btn btn-secondary">اعرف كيف تعمل المنصة</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="dashboard-card">
+        <div class="dashboard-head">
+          <span class="live-pill"><span class="live-dot"></span> مباشر</span>
+          <div class="dashboard-title">
+            <span>نظرة سريعة</span>
+            <strong>لوحة المسوّق</strong>
+          </div>
+        </div>
+
+        <div class="dash-grid">
+          <div class="dash-tile">
+            <div class="tile-head"><span>طلبات اليوم</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            </div>
+            <div class="tile-val">12</div>
+          </div>
+          <div class="dash-tile">
+            <div class="tile-head"><span>عمولة متوقعة</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/></svg>
+            </div>
+            <div class="tile-val">—</div>
+            <div class="tile-foot">وفق سياسة المنصة</div>
+          </div>
+          <div class="dash-tile">
+            <div class="tile-head"><span>نقرات الرابط</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="tile-val">384</div>
+          </div>
+          <div class="dash-tile">
+            <div class="tile-head"><span>عمولات مؤكدة</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <div class="tile-val">—</div>
+            <div class="tile-foot">وفق سياسة المنصة</div>
+          </div>
+        </div>
+
+        <div class="dash-order">
+          <div class="order-head">
+            <div>
+              <strong>آخر طلب</strong>
+              <p>طلب #MS-10428 — تم استلامه قبل 4 دقائق</p>
+            </div>
+            <span class="status-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> قيد التأكيد</span>
+          </div>
+          <div class="order-track">
+            <div class="track-line"></div>
+            <div class="track-line active"></div>
+            <div class="t-step done"><span></span><label>تم الاستلام</label></div>
+            <div class="t-step active"><span></span><label>قيد التأكيد</label></div>
+            <div class="t-step"><span></span><label>التسليم</label></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--  TRUST BAR  -->
+<section class="trust-bar reveal" style="padding: 0;">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <div><h4>منتجات جاهزة</h4><p>اختر منتجات قابلة للترويج ومناسبة للسوق.</p></div>
+      </div>
+      <div class="trust-item">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="3" x2="21" y2="21"/><path d="M21 16V8a2 2 0 0 0-1-1.73"/><path d="M3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0"/></svg></div>
+        <div><h4>بدون شراء مخزون</h4><p>ابدأ بدون تخزين أو شراء منتجات بنفسك.</p></div>
+      </div>
+      <div class="trust-item">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <div><h4>متابعة واضحة</h4><p>تابع الطلبات والعمولات داخل نظام واحد.</p></div>
+      </div>
+      <div class="trust-item">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div><h4>تشغيل منظم</h4><p>المنصة تساعدك في تنظيم الطلبات والتوصيل.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--  ABOUT  -->
+<section id="about">
+  <div class="container about-grid">
+    <div class="about-text reveal">
+      <span class="section-eyebrow">من نحن</span>
+      <h2>منصة <span class="brand-en">Meta Space Affiliate</span> تشغّل التسويق بالعمولة بطريقة منظّمة</h2>
+      <p>نحن جزء من <strong>Meta Space</strong> — نوفّر للمسوّقين وصنّاع المحتوى وأصحاب الصفحات منصة جدّية لإدارة الترويج والطلبات والعمولات، بدل تجربة Affiliate عشوائية. تختار المنتجات الجاهزة، تنشئ روابطك، وتتابع الأداء من مكان واحد.</p>
+      <ul class="check-list">
+        <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> كتالوج منتجات معتمد وجاهز للترويج.</li>
+        <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> ربط الطلب الناجح بالمسوّق تلقائيًا.</li>
+        <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> تقارير تشغيلية واضحة للأداء والعمولات.</li>
+        <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> دعم متابعة الحالات حتى التسليم.</li>
+      </ul>
+    </div>
+
+    <div class="about-visual reveal reveal-delay-1">
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="s-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 11h-6"/><path d="M19 8v6"/></svg></div>
+          <div class="s-lbl">مسوّقون نشطون</div>
+          <div class="s-val">مجتمع متنامٍ</div>
+        </div>
+        <div class="stat-card">
+          <div class="s-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+          <div class="s-lbl">منتجات معتمدة</div>
+          <div class="s-val">+1,200</div>
+        </div>
+        <div class="stat-card">
+          <div class="s-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+          <div class="s-lbl">نظام موثوق</div>
+          <div class="s-val">آمن ومنظّم</div>
+        </div>
+        <div class="stat-card">
+          <div class="s-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <div class="s-lbl">تقارير لحظية</div>
+          <div class="s-val">24/7</div>
+        </div>
+        <div class="stat-card stat-wide">
+          <div class="s-lbl">العمولة</div>
+          <div class="s-desc">تُحتسب العمولة وفق سياسة المنصة، وتظهر في لوحتك بحالات: <strong>متوقعة / مؤكدة</strong>.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--  BENEFITS  -->
+<section id="benefits" style="background: var(--ms-bg-blue-soft);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">لماذا تنضم؟</span>
+      <h2>لماذا تنضم إلى ميتا سبيس؟</h2>
+      <p>ابدأ التسويق بالعمولة داخل نظام واضح يوفر لك منتجات جاهزة، متابعة منظمة للطلبات والعمولات، ودعمًا يساعدك على تطوير أدائك.</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+        <h3>منتجات جاهزة</h3>
+        <p>اختر منتجات قابلة للتسويق ومناسبة للسوق.</p>
+      </div>
+      <div class="benefit-card reveal reveal-delay-1">
+        <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="3" x2="21" y2="21"/><path d="M5.5 5.5 3 8v8l9 5 9-5V8l-2.5-2.5"/></svg></div>
+        <h3>بدون شراء مخزون</h3>
+        <p>ابدأ بدون الحاجة لتخزين المنتجات أو إدارتها بنفسك.</p>
+      </div>
+      <div class="benefit-card reveal reveal-delay-2">
+        <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <h3>شحن وتشغيل منظم</h3>
+        <p>تساعدك المنصة في تنظيم الطلبات والتوصيل.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="ico orange"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg></div>
+        <h3>عمولات واضحة</h3>
+        <p>احصل على عمولة على كل طلب ناجح وفق سياسة المنصة.</p>
+        <span class="micro">* وفق سياسة المنصة المعتمدة</span>
+      </div>
+      <div class="benefit-card reveal reveal-delay-1">
+        <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg></div>
+        <h3>متابعة أسهل</h3>
+        <p>تابع الطلبات والعمولات داخل نظام واضح.</p>
+      </div>
+      <div class="benefit-card reveal reveal-delay-2">
+        <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+        <h3>دعم مستمر</h3>
+        <p>فريق يساعدك تفهم النظام وتطور أداءك.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--  PLATFORM PREVIEW  -->
+<section class="platform-preview">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Platform Preview</span>
+      <h2>تابع المنتج والطلب والعمولة من تجربة واحدة واضحة</h2>
+      <p>يساعدك Meta Space Affiliate على رؤية رحلة الترويج بشكل أبسط: منتج جاهز، طلب قابل للمتابعة، وعمولة تظهر وفق سياسة المنصة.</p>
+    </div>
+    <div class="preview-grid">
+      <!-- Product card -->
+      <div class="preview-card reveal">
+        <h4>منتج جاهز للترويج</h4>
+        <div class="product-mock">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg>
+        </div>
+        <div class="price-row">
+          <span class="price">— ر.س —</span>
+          <span class="tag">جاهز للترويج</span>
+        </div>
+        <span class="note-small">مناسب للتسويق بالعمولة وفق سياسة المنصة.</span>
+      </div>
+
+      <!-- Order card -->
+      <div class="preview-card reveal reveal-delay-1">
+        <h4>حالة الطلب</h4>
+        <div class="product-mock" style="background: linear-gradient(135deg,#0072CE,#1289F7);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="timeline-mini">
+          <div class="step done"></div>
+          <div class="step done"></div>
+          <div class="step active"></div>
+        </div>
+        <div class="timeline-labels"><span>مؤكد</span><span>قيد الشحن</span><span>تم التسليم</span></div>
+        <span class="note-small">تابع كل مرحلة من مراحل الطلب.</span>
+      </div>
+
+      <!-- Commission card -->
+      <div class="preview-card reveal reveal-delay-2">
+        <h4>حالة العمولة</h4>
+        <div class="product-mock" style="background: linear-gradient(135deg,#FDBA2D,#F57C00);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="commission-row"><span>متوقعة</span><strong>—</strong></div>
+        <div class="commission-row"><span>معلقة</span><strong>—</strong></div>
+        <div class="commission-row"><span>مؤكدة</span><strong>—</strong></div>
+        <span class="note-small">* العمولة تُحتسب وفق سياسة المنصة.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--  JOIN PROCESS  -->
+<section id="join">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">كيف تنضم إلينا؟</span>
+      <h2>رحلة بسيطة من التسجيل إلى المتابعة</h2>
+      <p>يمنحك Meta Space Affiliate تجربة أفيليت منظمة تبدأ من التسجيل واستكمال البيانات، ثم اختيار المنتجات المناسبة، وصولًا إلى متابعة الطلبات والعمولات.</p>
+    </div>
+
+    <div class="journey reveal">
+      <div class="j-step"><div class="num">1</div><h4>التسجيل</h4><p>أنشئ حسابك كمسوق</p></div>
+      <div class="j-step"><div class="num">2</div><h4>استكمال البيانات</h4><p>أكمل ملفك الشخصي</p></div>
+      <div class="j-step"><div class="num">3</div><h4>اختيار المنتج</h4><p>تصفح المنتجات الجاهزة</p></div>
+      <div class="j-step"><div class="num">4</div><h4>بدء التسويق</h4><p>روّج لجمهورك</p></div>
+      <div class="j-step"><div class="num">5</div><h4>متابعة الطلب والعمولة</h4><p>تابع نتائجك</p></div>
+    </div>
+
+    <div class="role-cards">
+      <div class="role-card you reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div><h4>دورك كمسوق</h4><p>تختار المنتج المناسب، تروج له، وتعمل على جلب العملاء.</p></div>
+      </div>
+      <div class="role-card platform reveal reveal-delay-1">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div><h4>دور المنصة</h4><p>تساعدك في تنظيم المنتجات، متابعة الطلبات، وتوضيح العمولات وفق سياسة المنصة.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--  START STEPS  -->
+<section class="start-steps" id="start">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">كيف تبدأ؟</span>
+      <h2>كيف تبدأ؟</h2>
+      <p>ابدأ رحلتك مع Meta Space Affiliate بخطوات بسيطة وواضحة.</p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="num">01</div>
+        <h3>سجل حسابك</h3>
+        <p>أنشئ حسابك كمسوق وابدأ خطوات الانضمام داخل النظام.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-1">
+        <div class="num">02</div>
+        <h3>اختر المنتج</h3>
+        <p>تصفح المنتجات المتاحة واختر ما يناسب جمهورك وطريقة تسويقك.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-2">
+        <div class="num">03</div>
+        <h3>تابع عمولتك</h3>
+        <p>سوّق المنتجات، تابع الطلبات، واحصل على عمولة على كل طلب ناجح وفق سياسة المنصة.</p>
+      </div>
+    </div>
+
+    <div class="steps-cta reveal">
+      <a href="/affiliate/register" class="btn btn-primary">ابدأ الآن
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+      </a>
+      <p class="safety-line">لا تحتاج إلى شراء مخزون. ابدأ بالتسجيل ثم اختر المنتجات المناسبة لك.</p>
+    </div>
+
+    <!-- Legal Trust Note -->
+    <div class="legal-note reveal">
+      <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <p>لا توجد وعود بأرباح مضمونة. العمولات تُحتسب على الطلبات الناجحة وفق سياسة المنصة. هذه المنصة موجهة للمسوقين وصناع المحتوى الراغبين في العمل ضمن نظام منظم.</p>
+    </div>
+  </div>
+</section>
+
+<!--  FOOTER  -->
+<footer class="footer" id="faq">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <img src="/logo (1).png" alt="Meta Space" />
+        </a>
+        <p>ميتا سبيس هي منصة تجارة وتسويق بالعمولة تساعدك تبدأ شغلك أونلاين بطريقة أوضح وأكثر تنظيمًا، من خلال منتجات جاهزة قابلة للترويج ونظام يساعدك على متابعة الطلبات والعمولات.</p>
+        <div class="social">
+          <a href="#" aria-label="فيسبوك"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9V14.9H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v6.9A10 10 0 0 0 22 12z"/></svg></a>
+          <a href="#" aria-label="واتساب"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9s-.5-.1-.6.1-.7.9-.9 1.1-.3.2-.6.1c-.3-.1-1.2-.5-2.4-1.5-.9-.8-1.5-1.8-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.4l.3-.3c.1-.1.1-.2 0-.4 0-.1-.6-1.5-.9-2.1-.2-.5-.5-.5-.6-.5h-.5c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 2 3.1 4.9 4.4.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.5-.4zM12 2C6.5 2 2 6.5 2 12c0 1.7.5 3.4 1.3 4.8L2 22l5.3-1.4A10 10 0 1 0 12 2zm0 18.3a8.3 8.3 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3a8.3 8.3 0 1 1 7 3.9z"/></svg></a>
+          <a href="#" aria-label="تليجرام"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9.8 16.2 9.6 19c.3 0 .5-.1.7-.3l1.7-1.6 3.5 2.6c.6.3 1.1.2 1.3-.6l2.4-11.4c.2-.9-.3-1.3-1-1L4.5 11.4c-.9.3-.9.9-.2 1.1l3.5 1.1L16 8.4c.4-.3.7-.1.4.1l-6.6 7.7z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>الصفحات</h5>
+        <a href="#about">من نحن؟</a>
+        <a href="#benefits">لماذا تنضم؟</a>
+        <a href="#join">كيف تنضم؟</a>
+        <a href="#start">كيف تبدأ؟</a>
+      </div>
+
+      <div class="footer-col">
+        <h5>قانوني</h5>
+        <a href="#">الأسئلة الشائعة</a>
+        <a href="#">سياسة الخصوصية</a>
+        <a href="#">الشروط والأحكام</a>
+      </div>
+
+      <div class="footer-col">
+        <h5>ابدأ الآن</h5>
+        <p style="color: var(--ms-text-on-blue-muted); font-size: 14px; margin-bottom: 14px;">انضم إلى مجتمع المسوقين في Meta Space.</p>
+        <a href="#start" class="btn btn-primary btn-sm">انضم الآن</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Meta Space Affiliate. جميع الحقوق محفوظة.</p>
+      <p>صُمّم بعناية لتجربة أفيليت منظمة.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky Mobile CTA -->
+<div class="mobile-cta">
+  <a href="#start" class="btn btn-primary">ابدأ الآن كمسوق</a>
+</div>
+
+<script>
+    // Header scroll
+const header = document.querySelector('.header');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 20) header.classList.add('scrolled');
+  else header.classList.remove('scrolled');
+
+  // Sticky mobile CTA after 40% of hero
+  const hero = document.querySelector('.hero');
+  const cta = document.querySelector('.mobile-cta');
+  const footer = document.querySelector('.footer');
+  if (hero && cta && footer) {
+    const heroBottom = hero.offsetTop + hero.offsetHeight * 0.4;
+    const footerTop = footer.getBoundingClientRect().top;
+    if (window.scrollY > heroBottom && footerTop > window.innerHeight) {
+      cta.classList.add('show');
+      document.body.classList.add('has-mobile-cta');
+    } else {
+      cta.classList.remove('show');
+    }
+  }
+});
+
+// Mobile menu
+const menuBtn = document.querySelector('.menu-btn');
+const mobileMenu = document.querySelector('.mobile-menu');
+const overlay = document.querySelector('.mobile-overlay');
+const mobileClose = document.querySelector('.mobile-close');
+function openMenu() { mobileMenu.classList.add('open'); overlay.classList.add('show'); }
+function closeMenu() { mobileMenu.classList.remove('open'); overlay.classList.remove('show'); }
+menuBtn?.addEventListener('click', openMenu);
+overlay?.addEventListener('click', closeMenu);
+mobileClose?.addEventListener('click', closeMenu);
+mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+</script>
+</body>
+</html>
